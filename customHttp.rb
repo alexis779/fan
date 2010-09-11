@@ -5,11 +5,17 @@ require 'uri'
 class CustomHttp
 
 	@@separator = "\r\n"
+	@@httpVersion = "HTTP/1.1"
+	# HUGE_STRING_LENGTH
+	@@bufferSize = 8192
+	@@readTimeout = 15
+
 	def initialize
 		@logger = Logger.new($stderr)
 		@logger.level = Logger::DEBUG
 
 		@ips = {}
+		
 	end
 
 	def get(url)
@@ -26,49 +32,28 @@ class CustomHttp
 	end
 
 	def httpRequest(host, port, path, method)
+		request = getRequest(method, path, host)
 
-		# TODO: add User-Agent
-		# TODO: specify HTTP version
-		request =
-%Q|#{method} #{path} HTTP/1.1
-Host: #{host}
-Connection: keep-alive
-
-|
 		@logger.debug("Getting connection on #{host}:#{port}")
 		socket = openSocket(host, port)
 		@logger.debug("#{method} #{path}")
 		socket.print(request)
-
-		socket.sync = true
-		statusLine = socket.readline
-		headers = []
-		
-		begin
-			headers << socket.read(1024 * 16)
-			p headers.last
-		rescue EOFError
-		end
-
+		headers = readSocket(socket)
+		@logger.debug("#{headers.size} characters were read.")
 		socket.close
 
-		if headers.empty?
-			return nil
-		end
-		exit
-=begin
-		fileWriter = open("body", "w")
-		fileWriter.print(body)
-		fileWriter.close
-=end
+		headers = headers.split(@@separator)
 
-
-		httpVersion, statusCode, status = statusLine.split
+		header = headers.shift
+		httpVersion, statusCode, status = header.split
+		
+		#@logger.debug(statusLine)
 		@logger.debug("#{statusCode} #{status}")
 
 		if statusCode == "302"
+			# TODO: scan Set-Cookie headers first
 			headers.each { |header|
-				puts header
+				#puts header
 				if header =~ /^Location: /
 					location = $'
 					# TODO check if location is absolute
@@ -83,6 +68,49 @@ Connection: keep-alive
 
 	private
 
+	def readSocket(socket)
+=begin
+		# read blocking io
+		# Should be wrapped in timeout(@@readTimeout) {}
+
+		socket.sync = true
+		# Buffered (sync = false) or not buffered (sync = true)
+
+		# will wait till the client receives EOF, ie the server closes the connection
+		content = socket.read
+
+		# low level read, for buffered io
+		#content = socket.sysread(@@bufferSize)
+
+		# try a sysread first, then read if it failed ("sysread for buffered IO (IOError)")
+		#content = socket.readpartial(@@bufferSize)
+=end
+
+		# read non blocking io
+		content = nil
+		# wait for the socket to become readable, but does not block
+		if IO.select([socket], nil, nil, @@readTimeout)
+			# set O_NONBLOCK as file descriptor then read
+			content = socket.read_nonblock(@@bufferSize)
+		end
+		content
+	end
+
+	def getRequest(method, path, host)
+		# TODO: add User-Agent
+		# TODO: specify HTTP version
+
+		[
+			"#{method} #{path} #{@@httpVersion}",
+			"Accept: */*",
+			"Connection: close",
+			"Host: #{host}",
+			"",
+			""
+		].join(@@separator)
+
+	end
+
 	def openSocket(host, port)
 		ip = @ips[host]
 		if ip.nil?
@@ -91,7 +119,8 @@ Connection: keep-alive
 			@logger.debug("IP address for #{host}: " + ip)
 		end
 
-		TCPSocket.open(ip, port)
+		socket = TCPSocket.open(ip, port)
+		socket
 	end
 
 	# IPSocket::getaddress(host)
