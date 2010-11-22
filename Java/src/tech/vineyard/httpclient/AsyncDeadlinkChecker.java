@@ -22,17 +22,13 @@ public class AsyncDeadlinkChecker {
 		
 		Iterator<JobQueue> iterator = getIterator();
 		
-		int n = 0;
 		while (iterator.hasNext()) {
-			++n;
 			JobQueue queue = iterator.next();
 
 			this.client.request(queue);
 		}
 		
-		LOG.info("Waiting for client");
 		this.client.waitClient();
-		LOG.info("Done waiting");
 
 	}
 
