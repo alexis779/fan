@@ -28,7 +28,7 @@ class NetHttp
 		if method == "HEAD"
 			request = Net::HTTP::Head.new(path)
 		else
-			return 
+			# TODO: implement other methods
 		end
 		# TODO: add headers
 		#request.initialize_http_header(headers)
@@ -49,7 +49,7 @@ class NetHttp
 
 	def getHttp(host, port)
 		key = host + "_" + port.to_s
-		# check if the pool misses corresponding connection
+		# check if the pool contains corresponding connection
 		http = @httpHash[key]
 		if http.nil?
 			http = Net::HTTP.new(host, port)
@@ -64,4 +64,4 @@ class NetHttp
 end
 
 http = NetHttp.new
-http.get("http://www.dailymotion.com/")
+http.get("http://xkings.net/video/25523/polvo-amateur-electra-culo-gordo/")

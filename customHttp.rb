@@ -74,7 +74,7 @@ class CustomHttp
 		# Should be wrapped in timeout(@@readTimeout) {}
 
 		socket.sync = true
-		# Buffered (sync = false) or not buffered (sync = true)
+		# with Ruby buffer (sync = false) or without (sync = true)
 
 		# will wait till the client receives EOF, ie the server closes the connection
 		content = socket.read
@@ -82,8 +82,11 @@ class CustomHttp
 		# low level read, for buffered io
 		#content = socket.sysread(@@bufferSize)
 
-		# try a sysread first, then read if it failed ("sysread for buffered IO (IOError)")
+		# try a sysread first, then read if it not buffered ("sysread for buffered IO (IOError)")
 		#content = socket.readpartial(@@bufferSize)
+
+		# socket class
+		content = socket.recv(@@bufferSize)
 =end
 
 		# read non blocking io
@@ -91,7 +94,9 @@ class CustomHttp
 		# wait for the socket to become readable, but does not block
 		if IO.select([socket], nil, nil, @@readTimeout)
 			# set O_NONBLOCK as file descriptor then read
-			content = socket.read_nonblock(@@bufferSize)
+			content = socket.recv_nonblock(@@bufferSize)
+			#content = socket.read_nonblock(@@bufferSize)
+
 		end
 		content
 	end
@@ -99,6 +104,7 @@ class CustomHttp
 	def getRequest(method, path, host)
 		# TODO: add User-Agent
 		# TODO: specify HTTP version
+		# TODO: try Keep-Alive
 
 		[
 			"#{method} #{path} #{@@httpVersion}",
@@ -119,8 +125,7 @@ class CustomHttp
 			@logger.debug("IP address for #{host}: " + ip)
 		end
 
-		socket = TCPSocket.open(ip, port)
-		socket
+		TCPSocket.open(ip, port)
 	end
 
 	# IPSocket::getaddress(host)

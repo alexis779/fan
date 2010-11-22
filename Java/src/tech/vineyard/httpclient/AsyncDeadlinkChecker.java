@@ -26,9 +26,6 @@ public class AsyncDeadlinkChecker {
 		while (iterator.hasNext()) {
 			++n;
 			JobQueue queue = iterator.next();
-			if (queue.getHost().equals("video.nifty.com") || queue.getHost().equals("video.mail.ru")) {
-				//return;
-			}
 
 			this.client.request(queue);
 		}

@@ -38,7 +38,6 @@ public class SimpleNHttpClient {
 	
 	/**
 	 * Counter to keep track of the number of responses that were received.
-	 * TODO increment it if a redirect is followed. This translates into adding a job in the queue.
 	 */
 	private int responseReceived;
 	
@@ -47,39 +46,9 @@ public class SimpleNHttpClient {
 		String path1;
 		String path2;
 		
-		/*
-		this.host = "12seconds.tv";
-		path1 = "/channel/thesocialretard/359373";
-		path2 = "/channel/erikmentary/171964";
-		
-		this.host = "player.video.news.com.au";
-		path1 = "/theaustralian/?WWB2Xw2hVigi5nVg5SeexyQt75YMby44";
-		path2 = "/news/?U4ST2ZW25Us2Am_tmfCcIFru3hW_YaKl";
-		
-		this.host = "terratv.terra.com.br";
-		path1 = "/Especiais/Homem/Carro-Online/4540-223046/Peugeot-2008-busca-unir-conceitos.htm";
-		
-		this.host = "video.fc2.com";
-		path1 = "/content/%E3%81%94%E3%82%8D%E3%81%AB%E3%82%83%E3%83%BC%E3%81%94/20100130BBkhrUGJ/";
-		
-		this.host = "www.livevideo.com"; 
-		path1 = "/video/2134E01DFB10434C82C4735B9397B885/scrapbooking-en-estados-unidos.aspx";
-
-		this.host = "www.timsah.com";
-		path1 = "/Ashlynn-Brooke-nefes-kesen-cekim/ZrrTVyxhOk-";
-
-		this.host = "www.bollywo.com"; 
-		path1 = "/video/165906/rana-hits-the-dance-floormp4.html";
-		path2 = "/videos/71928/djmafijanr2010.html";
-		
-		this.host = "video.tvguide.com"; 
+		this.host = "video.tvguide.com";
 		path1 = "/Date+Night+2010/Date+Night/4866938?autoplay=true%20partnerid=OVG";
 		path2 = "/Brooks++Dunn/Put+a+Girl+in+It/5445966?autoplay=true%20partnerid=OVG";
-		*/
-		
-		this.host = "ar.netlog.com";
-		path1 = "/go/explore/videos/videoid=158666";
-		path2 = "/go/explore/videos/videoid=332671";
 		
 		requestQueue.add(path1);
 		requestQueue.add(path2);
@@ -106,18 +75,18 @@ public class SimpleNHttpClient {
 	}
 	
 	private void postSelect() throws IOException {
-        Set<SelectionKey> selectedKeys = this.selector.selectedKeys();
-        for (Iterator<SelectionKey> it = selectedKeys.iterator(); it.hasNext(); ) {
-            SelectionKey key = it.next();
-            processKey(key);
-        }
-        selectedKeys.clear();
+		Set<SelectionKey> selectedKeys = this.selector.selectedKeys();
+		for (Iterator<SelectionKey> it = selectedKeys.iterator(); it.hasNext(); ) {
+    			SelectionKey key = it.next();
+    			processKey(key);
+		}
+		selectedKeys.clear();
         
 	}
 
 	
 	/**
-	 * Writing in the socket through a writable key does not mean we will receive the corresponding response through next readable key.
+	 * Writing in the socket via the writable key does not mean we will receive the corresponding response through next readable key.
 	 * We attach the job to the key when polling from the queue, so that we can add it again if we see an EOF instead of a valid response.
 	 * @param key The selected key.
 	 * @throws IOException
@@ -227,7 +196,7 @@ public class SimpleNHttpClient {
 	}
 
 	private void connect() {
-        try {
+		try {
 			SocketChannel socketChannel = SocketChannel.open();
 			socketChannel.configureBlocking(false);
 			

@@ -7,6 +7,7 @@ class EMTest
                 EventMachine.run {
                         fiber = Fiber.new {
 				checkUrls
+				EventMachine.stop
                         }
                         fiber.resume
                }
@@ -26,7 +27,6 @@ class EMTest
  			end
 			puts "#{status}\t#{url}"
 		}
-		EventMachine.stop
 	end
 
 	# Do a HEAD request

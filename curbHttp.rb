@@ -46,19 +46,6 @@ class CurbHttp
 		statusCode
 	end
 
-=begin
-	def getHttp(host, port)
-		key = host + "_" + port.to_s
-		# check if the pool contains corresponding connection
-		http = @httpHash[key]
-		if http.nil?
-
-			@httpHash[key] = http
-		end
-
-		http
-	end
-=end
 end
 
 http = CurbHttp.new

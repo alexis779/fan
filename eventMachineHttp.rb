@@ -32,22 +32,14 @@ class EventMachineHttp
 
 		request = EventMachine::HttpRequest.new(url).head :redirects => 1
 		request.callback {
-			p request.response_header.status
-			p request.response_header
+			@logger.info(request.response_header.status)
 			EventMachine.stop
 		}
 
 		request.errback { |e|
-			p e
-			puts "Error------------------------------"
+			@logger.warn(e)
 		}
 
-		#@logger.debug("#{method} #{path}")
-
-		#statusCode =
-		#@logger.debug(statusCode)
-
-		#statusCode
 	end
 
 end
@@ -55,6 +47,5 @@ end
 http = EventMachineHttp.new
 EventMachine::run {
 	http.get("http://www.dailymotion.com/")
-	puts "Alexis"
 }
 
