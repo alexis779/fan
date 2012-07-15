@@ -319,6 +319,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="selector" eType="#//Selector"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="" eType="#//java.nio.channels.Selector"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="" eType="#//java.nio.channels.Selector"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="org.apache.http.impl.nio.reactor.AbstractMultiworkerIOReactor"
       abstract="true" eSuperTypes="#//org.apache.http.nio.reactor.IOReactor">

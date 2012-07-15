@@ -1646,4 +1646,18 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_PABJI-sQEd-s6uA1WufK_A" points="[-16, 33, 19, -37]$[-33, 57, 2, -13]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_PAFakOsQEd-s6uA1WufK_A" id="(0.505338078291815,0.20588235294117646)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5PjQMPnmEd-PgemDORFujg" type="3002" source="_9v5n8N-lEd-Ura-R0slVyw" target="_55FKEOqrEd-s6uA1WufK_A">
+    <children xmi:type="notation:Node" xmi:id="_5Pm6kPnmEd-PgemDORFujg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5Pm6kfnmEd-PgemDORFujg" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5PnhoPnmEd-PgemDORFujg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5PnhofnmEd-PgemDORFujg" x="-3" y="14"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_5PjQMfnmEd-PgemDORFujg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5PjQMvnmEd-PgemDORFujg" fontColor="4210752" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="httpComponents.ecore#//org.apache.http.impl.nio.reactor.AbstractIOReactor/.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5PjQM_nmEd-PgemDORFujg" points="[1, -5, 2, 37]$[1, -34, 2, 8]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5PrzEPnmEd-PgemDORFujg" id="(0.15669515669515668,0.033707865168539325)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5PrzEfnmEd-PgemDORFujg" id="(0.6544502617801047,0.813953488372093)"/>
+  </edges>
 </notation:Diagram>

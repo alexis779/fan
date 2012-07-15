@@ -68,16 +68,16 @@ public class HttpClientNio2 {
         clientHandler.setEventListener(new SimpleEventListener());
 
         Thread thread = new Thread(new Runnable() {
-			public void run() {
-				IOEventDispatch ioEventDispatch = new DefaultClientIOEventDispatch(clientHandler, params);
-		        try {
-					ioReactor.execute(ioEventDispatch);
-				} catch (InterruptedIOException iioe) {
-					LOG.warn(iioe);
-				} catch (IOReactorException iore) {
-					LOG.warn(iore);
-				}
-			}
+    			public void run() {
+    				IOEventDispatch ioEventDispatch = new DefaultClientIOEventDispatch(clientHandler, params);
+    		        try {
+    					ioReactor.execute(ioEventDispatch);
+    				} catch (InterruptedIOException iioe) {
+    					LOG.warn(iioe);
+    				} catch (IOReactorException iore) {
+    					LOG.warn(iore);
+    				}
+    			}
         	
         });
         thread.start();
@@ -93,7 +93,7 @@ public class HttpClientNio2 {
 		}
 	}
 	
-    protected RequestExecutionHandler createRequestExecutionHandler() {
+  protected RequestExecutionHandler createRequestExecutionHandler() {
 		return new RequestExecutionHandler();
 	}
 	public SessionRequest openConnection(final InetSocketAddress address, final Object attachment) {
