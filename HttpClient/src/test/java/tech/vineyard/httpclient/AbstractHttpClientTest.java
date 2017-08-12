@@ -1,14 +1,11 @@
-package tech.vineyard.httpclient.test;
+package tech.vineyard.httpclient;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URI;
 
-import org.junit.Test;
-
-import tech.vineyard.httpclient.Job2;
-import tech.vineyard.httpclient.JobQueue;
+import static org.junit.Assert.assertTrue;
 
 
 public abstract class AbstractHttpClientTest {

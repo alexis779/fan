@@ -1,10 +1,10 @@
-package tech.vineyard.httpclient.test;
+package tech.vineyard.httpclient;
 
 import tech.vineyard.httpclient.JobQueue;
 import tech.vineyard.httpclient.SyncDeadlinkChecker;
 
 
-public class HttpClientTest extends AbstractHttpClientTest {
+public class TestHttpClient extends AbstractTestHttpClient {
 	
 	private SyncDeadlinkChecker syncDeadlinkChecker = new SyncDeadlinkChecker();
 

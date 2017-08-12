@@ -2,11 +2,11 @@ package tech.vineyard.httpclient;
 
 import java.util.Iterator;
 
-public abstract class AbstractDeadlinkChecker {
+public abstract class AbstractDeadLinkChecker {
 
 	private Iterator<JobQueue> iterator;
 
-	protected AbstractDeadlinkChecker(String input) {
+	protected AbstractDeadLinkChecker(String input) {
 		if (input != null) {
 			setIterator(new UrlListIterator(input));
 		}

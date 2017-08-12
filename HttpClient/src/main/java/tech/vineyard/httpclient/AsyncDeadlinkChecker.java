@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-public class AsyncDeadlinkChecker extends AbstractDeadlinkChecker {
+public class AsyncDeadlinkChecker extends AbstractDeadLinkChecker {
 	private static final Log LOG = LogFactory.getLog(AsyncDeadlinkChecker.class);
 	
 	private HttpClientNio2 client = new HttpClientNio2();

@@ -1,4 +1,4 @@
-package tech.vineyard.httpclient.test;
+package tech.vineyard.httpclient;
 
 import org.apache.http.nio.reactor.IOReactorException;
 

@@ -32,7 +32,7 @@ import org.apache.http.params.HttpParams;
  * @author alex
  *
  */
-public class SyncDeadlinkChecker extends AbstractDeadlinkChecker {
+public class SyncDeadlinkChecker extends AbstractDeadLinkChecker {
 	private static final Log LOG = LogFactory.getLog(SyncDeadlinkChecker.class);
 	
 	private static final int MAX_THREADS = 500;

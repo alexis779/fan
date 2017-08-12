@@ -1,4 +1,4 @@
-package tech.vineyard.httpclient.test;
+package tech.vineyard.httpclient;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

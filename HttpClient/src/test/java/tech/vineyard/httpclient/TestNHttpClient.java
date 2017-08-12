@@ -1,4 +1,4 @@
-package tech.vineyard.httpclient.test;
+package tech.vineyard.httpclient;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.junit.Before;
 
 import tech.vineyard.httpclient.JobQueue;
 
-public class NHttpClientTest extends AbstractHttpClientTest {
+public class TestNHttpClient extends AbstractTestHttpClient {
 	private TestHttpClientNio2 client;	
 
 	@Before

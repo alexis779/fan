@@ -1,4 +1,4 @@
-package tech.vineyard.httpclient.test;
+package tech.vineyard.httpclient;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,18 +30,6 @@ public abstract class AbstractTestHttpClient {
 		doRequest(jobList);
 		assertTrue(jobList.isEmpty());
 	}	
-
-	/**
-	 * Test redirect.
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
-	@Test
-	public void vidivodo() throws IOException, InterruptedException {
-		addJob("http://www.vidivodo.com/185618/heidi-lenhart-red-meat");
-		doRequest(jobList);
-		assertTrue(jobList.isEmpty());
-	}
 
 	/**
 	 * Test Keep-Alive policy.
@@ -127,16 +115,6 @@ public abstract class AbstractTestHttpClient {
 		addJob("http://www.timsah.com/Ashlynn-Brooke-nefes-kesen-cekim/ZrrTVyxhOk-");
 		addJob("http://www.timsah.com/Misirlarin-korkulu-ruyasi/dTrrT7a2LdW");
 		//addJob("http://www.timsah.com/15-saniyede-kirmizi-kart-gordu/ZTQddOMBsVz");
-		doRequest(jobList);
-		assertTrue(jobList.isEmpty());
-	}		
-
-	
-	@Test
-	public void videoNifty() throws IOException, InterruptedException {
-		addJob("http://video.nifty.com/cs/catalog/video_metadata/catalog_100306288648_1.htm");
-		addJob("http://video.nifty.com/cs/catalog/video_metadata/catalog_100130278238_1.htm");
-		addJob("http://video.nifty.com/cs/catalog/video_metadata/catalog_091209265732_1.htm");
 		doRequest(jobList);
 		assertTrue(jobList.isEmpty());
 	}		
