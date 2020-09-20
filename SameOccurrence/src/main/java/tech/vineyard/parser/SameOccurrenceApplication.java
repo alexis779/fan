@@ -30,11 +30,17 @@ public class SameOccurrenceApplication {
     private ByteBuffer byteBuffer;
     private String input;
 
+    /**
+     *
+     * @param path path to input file to parse
+     * @throws IOException
+     */
     public SameOccurrenceApplication(String path) throws IOException {
         byteBuffer = readFile(path);
         //byteBuffer = mmapFile(path);
         input = decodeArray(byteBuffer);
         //input = decodeBuffer(byteBuffer);
+        //antlr();
         split();
     }
 
@@ -80,6 +86,7 @@ public class SameOccurrenceApplication {
         String[] tokens = input.split("\\s+");
         end = System.currentTimeMillis();
         LOG.info(" String.split in {} ms", end - start);
+        long startParseInt = System.currentTimeMillis();
         int n = parseToken(tokens);
         int q = parseToken(tokens);
         int[] a = new int[n];
@@ -92,11 +99,13 @@ public class SameOccurrenceApplication {
         }
         assert tokenOffset == tokens.length;
         end = System.currentTimeMillis();
+        LOG.info(" int parsing in {} ms", end - startParseInt);
         LOG.info("Splitting in {} ms", end - start);
     }
 
     private int parseToken(String[] tokens) {
-        return Integer.valueOf(tokens[tokenOffset++]);
+        return Integer.parseInt(tokens[tokenOffset++]);
+        // return Integer.valueOf(tokens[tokenOffset++]);
     }
 
 
@@ -185,7 +194,7 @@ public class SameOccurrenceApplication {
     }
 
     private String getFile(String path) {
-        return getClass().getResource(path).getFile();
+        return path;
     }
 
 
